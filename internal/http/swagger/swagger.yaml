@@ -1,0 +1,1490 @@
+basePath: /api/v1
+definitions:
+  Address:
+    properties:
+      city:
+        example: Mumbai
+        type: string
+      coordinates:
+        $ref: '#/definitions/JSONB'
+      country:
+        example: India
+        type: string
+      pincode:
+        example: "123456"
+        type: string
+      state:
+        example: Maharashtra
+        type: string
+      street:
+        example: 123 Main St
+        type: string
+    type: object
+  BaseResponse:
+    properties:
+      data: {}
+    type: object
+  CreateMenuCardInput:
+    properties:
+      category:
+        example: veg
+        type: string
+      description:
+        example: description
+        type: string
+      food_type:
+        example: Main Course
+        type: string
+      image:
+        example: image
+        type: string
+      is_available:
+        example: true
+        type: boolean
+      meal_type:
+        example: DiNNER
+        type: string
+      name:
+        example: Butter Chicken
+        type: string
+      price:
+        example: 300
+        type: number
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      size:
+        example: half plate
+        type: string
+    type: object
+  CreateRatingInput:
+    properties:
+      name:
+        example: Alex t
+        type: string
+      rating:
+        example: 5
+        type: number
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      review:
+        example: review
+        type: string
+      suggestion:
+        example: Make sure reduce serving time
+        type: string
+    type: object
+  CreateResturentInput:
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      license:
+        example: license
+        type: string
+      name:
+        example: Alamgiri Resturent
+        type: string
+    type: object
+  CreateUserInput:
+    properties:
+      email:
+        example: email
+        type: string
+      mobile:
+        example: mobile
+        type: string
+      password:
+        example: password
+        type: string
+      resturent_name:
+        example: resturent_name
+        type: string
+      resturentID:
+        type: string
+      role:
+        example: role
+        type: string
+      username:
+        example: username
+        type: string
+    type: object
+  DataNotFoundError:
+    type: object
+  FilterFieldPredicate:
+    properties:
+      field:
+        description: Field represents a column for the entity you are filtering
+        example: name
+        type: string
+      operator:
+        allOf:
+        - $ref: '#/definitions/FilterOp'
+        description: Operator represents the filter operation you'd like to perform
+          on the field
+        enum:
+        - eq
+        - neq
+        - gt
+        - gte
+        - lt
+        - lte
+        - in
+        - nin
+        - like
+        - nlike
+        - ilike
+        - nilike
+        - isnull
+        - notnull
+        - between
+        example: eq
+      value:
+        description: Value represents the value you'd like to filter by
+    type: object
+  FilterInput:
+    properties:
+      fields:
+        description: Fields represents the fields you want to filter
+        items:
+          $ref: '#/definitions/FilterFieldPredicate'
+        type: array
+      sort_keys:
+        description: SortKeys represents the sort keys you want to sort by
+        items:
+          $ref: '#/definitions/SortKey'
+        type: array
+    type: object
+  FilterOp:
+    enum:
+    - eq
+    - neq
+    - gt
+    - gte
+    - lt
+    - lte
+    - in
+    - nin
+    - like
+    - nlike
+    - ilike
+    - nilike
+    - isnull
+    - notnull
+    - between
+    type: string
+    x-enum-varnames:
+    - FilterOpEq
+    - FilterOpNeq
+    - FilterOpGt
+    - FilterOpGte
+    - FilterOpLt
+    - FilterOpLte
+    - FilterOpIn
+    - FilterOpNin
+    - FilterOpLike
+    - FilterOpNlike
+    - FilterOpIlike
+    - FilterOpNilike
+    - FilterOpIsnull
+    - FilterOpNotnull
+    - FilterOpBetween
+  ForbiddenAccessError:
+    properties:
+      code:
+        example: FORBIDDEN_ACCESS
+        type: string
+      message:
+        example: You are forbidden from accessing this resource
+        type: string
+    type: object
+  InvalidRequestError:
+    properties:
+      message:
+        example: invalid request
+        type: string
+    type: object
+  JSONB:
+    additionalProperties: true
+    type: object
+  LoginResponse:
+    properties:
+      token:
+        example: token
+        type: string
+    type: object
+  MenuCard:
+    properties:
+      category:
+        example: Veg
+        type: string
+      created_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+      description:
+        example: description
+        type: string
+      food_type:
+        example: Starter
+        type: string
+      id:
+        example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+        type: string
+      image:
+        example: image
+        type: string
+      is_available:
+        example: true
+        type: boolean
+      meal_type:
+        example: Dinner
+        type: string
+      name:
+        example: Alex t
+        type: string
+      price:
+        example: 5
+        type: number
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      size:
+        example: half plate
+        type: string
+      updated_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+    type: object
+  NotFoundError:
+    type: object
+  PaginationResponse:
+    properties:
+      data: {}
+      page:
+        example: 1
+        type: integer
+      size:
+        example: 10
+        type: integer
+      total:
+        example: 1000
+        type: integer
+    type: object
+  Rating:
+    properties:
+      created_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+      id:
+        example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+        type: string
+      name:
+        example: Alex t
+        type: string
+      rating:
+        example: 5
+        type: number
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      review:
+        example: review
+        type: string
+      suggestion:
+        example: suggestion
+        type: string
+      updated_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+    type: object
+  Resturent:
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      created_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+      id:
+        example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+        type: string
+      license:
+        example: license
+        type: string
+      name:
+        example: Alamgiri Resturent
+        type: string
+      updated_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+    type: object
+  SortKey:
+    properties:
+      direction:
+        description: Direction represents the direction of the sort
+        example: asc
+        type: string
+      field:
+        description: Field represents a column for the entity you are sorting
+        example: name
+        type: string
+    type: object
+  SystemError:
+    properties:
+      code:
+        example: INTERNAL_SERVER_ERROR
+        type: string
+      message:
+        example: Oops! Something went wrong. Please try again later
+        type: string
+    type: object
+  UnauthorizedError:
+    properties:
+      code:
+        example: UNAUTHORIZED
+        type: string
+      message:
+        example: You are not authorized to access this resource
+        type: string
+    type: object
+  UpdateMenuCardInput:
+    properties:
+      category:
+        example: veg
+        type: string
+      description:
+        example: description
+        type: string
+      food_type:
+        example: Main Course
+        type: string
+      image:
+        example: image
+        type: string
+      is_available:
+        example: true
+        type: boolean
+      meal_type:
+        example: BREAKFAST
+        type: string
+      name:
+        example: Butter Chicken
+        type: string
+      price:
+        example: 300
+        type: number
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      size:
+        example: half plate
+        type: string
+    type: object
+  UpdateResturentInput:
+    properties:
+      address:
+        $ref: '#/definitions/Address'
+      license:
+        example: license
+        type: string
+      name:
+        example: Alamgiri Resturent
+        type: string
+    type: object
+  UpdateUserInput:
+    properties:
+      email:
+        example: email
+        type: string
+      mobile:
+        example: mobile
+        type: string
+      password:
+        example: password
+        type: string
+      resturentID:
+        type: string
+      role:
+        example: role
+        type: string
+      username:
+        example: username
+        type: string
+    type: object
+  User:
+    properties:
+      created_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+      email:
+        example: email
+        type: string
+      id:
+        example: a0eebc99-9c0b-4ef8-bb6d-6bb9bd380a11
+        type: string
+      mobile:
+        example: mobile
+        type: string
+      password:
+        example: password
+        type: string
+      resturent_id:
+        example: c816d9e0-63e5-11ec-90d6-0242ac120003
+        type: string
+      role:
+        allOf:
+        - $ref: '#/definitions/github_com_rizwank123_myResturent_internal_domain.UserRole'
+        example: role
+      updated_at:
+        example: 2022-02-16 15:35:10.535606+05:30
+        type: string
+      username:
+        example: username
+        type: string
+    type: object
+  github_com_rizwank123_myResturent_internal_domain.LoginUserInput:
+    properties:
+      email:
+        example: email
+        type: string
+      password:
+        example: password
+        type: string
+    type: object
+  github_com_rizwank123_myResturent_internal_domain.UpdateRatingInput:
+    properties:
+      name:
+        example: Alex t
+        type: string
+      rating:
+        example: 5
+        type: number
+      review:
+        example: Food was delicious
+        type: string
+      suggestion:
+        example: Make sure reduce serving time
+        type: string
+    type: object
+  github_com_rizwank123_myResturent_internal_domain.UserRole:
+    enum:
+    - OWNER
+    - ADMIN
+    - SUPERVISOR
+    type: string
+    x-enum-varnames:
+    - UserRoleOwner
+    - UserRoleAdmin
+    - UserRoleSupervisor
+host: localhost:7700
+info:
+  contact:
+    email: rizwank431@gmail.com
+    name: API Support
+    url: https://rizwank123.github.io
+  description: Resturnet's set of APIs
+  termsOfService: http://example.com/terms/
+  title: Resturnet API
+  version: "1.0"
+paths:
+  /menu_card:
+    post:
+      consumes:
+      - application/json
+      description: Create a menu card
+      operationId: createMenuCard
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/CreateMenuCardInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/MenuCard'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Create a menu card
+      tags:
+      - MenuCard
+  /menu_card/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a menu card
+      operationId: deleteMenuCard
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/MenuCard'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Delete a menu card
+      tags:
+      - MenuCard
+    get:
+      consumes:
+      - application/json
+      description: Retrieve a menu card
+      operationId: getMenuCard
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/MenuCard'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Retrieve a menu card
+      tags:
+      - MenuCard
+    patch:
+      consumes:
+      - application/json
+      description: Update a menu card
+      operationId: updateMenuCard
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateMenuCardInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/MenuCard'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Update a menu card
+      tags:
+      - MenuCard
+  /menu_card/filter:
+    post:
+      consumes:
+      - application/json
+      description: Filter menu cards by criteria
+      operationId: filterMenuCards
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Filter criteria
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/FilterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/PaginationResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/MenuCard'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Filter menu cards
+      tags:
+      - MenuCard
+  /rating:
+    post:
+      consumes:
+      - application/json
+      description: Create a rating
+      operationId: createRating
+      parameters:
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/CreateRatingInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Rating'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Create a rating
+      tags:
+      - Rating
+  /rating/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a rating by id
+      operationId: deleteRating
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Delete a rating
+      tags:
+      - Rating
+    get:
+      consumes:
+      - application/json
+      description: Find a rating by id
+      operationId: findRatingByID
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Rating'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Find a rating by id
+      tags:
+      - Rating
+    put:
+      consumes:
+      - application/json
+      description: Update a rating with the given ID
+      operationId: updateRating
+      parameters:
+      - description: Rating ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_rizwank123_myResturent_internal_domain.UpdateRatingInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/Rating'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Update a rating
+      tags:
+      - Rating
+  /rating/filter:
+    post:
+      consumes:
+      - application/json
+      description: Filter ratings by criteria
+      operationId: filterRatings
+      parameters:
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Filter criteria
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/FilterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/PaginationResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/Rating'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Filter ratings
+      tags:
+      - Rating
+  /resturent:
+    post:
+      consumes:
+      - application/json
+      description: Create a resturent
+      operationId: createResturent
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/CreateResturentInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/Resturent'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Create a resturent
+      tags:
+      - Resturent
+  /resturent/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete a resturent by id
+      operationId: deleteResturent
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Resturent id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: No Content
+          schema:
+            $ref: '#/definitions/BaseResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Delete a resturent
+      tags:
+      - Resturent
+    get:
+      consumes:
+      - application/json
+      description: Find a resturent by id
+      operationId: findResturentById
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Resturent id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/Resturent'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Find a resturent by id
+      tags:
+      - Resturent
+    put:
+      consumes:
+      - application/json
+      description: Update a resturent
+      operationId: updateResturent
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Resturent id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateResturentInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/Resturent'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Update a resturent
+      tags:
+      - Resturent
+  /resturent/filter:
+    post:
+      consumes:
+      - application/json
+      description: Filter resturents by criteria
+      operationId: filterResturents
+      parameters:
+      - description: Filter criteria
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/FilterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/PaginationResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/Resturent'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Filter resturents
+      tags:
+      - Resturent
+  /user:
+    post:
+      consumes:
+      - application/json
+      description: Registers a new user
+      operationId: registerUser
+      parameters:
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/CreateUserInput'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Registers a new user
+      tags:
+      - User
+  /user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Find user by id
+      operationId: findUserById
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Find user by id
+      tags:
+      - User
+    put:
+      consumes:
+      - application/json
+      description: Updates a user
+      operationId: updateUser
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: User id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateUserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/BaseResponse'
+            - properties:
+                data:
+                  $ref: '#/definitions/User'
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/DataNotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Updates a user
+      tags:
+      - User
+  /user/filter:
+    post:
+      consumes:
+      - application/json
+      description: Filter user by criteria
+      operationId: filterUser
+      parameters:
+      - description: 'Bearer '
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: Page number
+        in: query
+        name: page
+        type: integer
+      - description: Page size
+        in: query
+        name: size
+        type: integer
+      - description: Filter criteria
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/FilterInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/PaginationResponse'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/User'
+                  type: array
+              type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "403":
+          description: Forbidden
+          schema:
+            $ref: '#/definitions/ForbiddenAccessError'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/NotFoundError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      security:
+      - JWT: []
+      summary: Filter user
+      tags:
+      - User
+  /user/login:
+    post:
+      consumes:
+      - application/json
+      description: Logs in a user
+      operationId: loginUser
+      parameters:
+      - description: Payload
+        in: body
+        name: in
+        required: true
+        schema:
+          $ref: '#/definitions/github_com_rizwank123_myResturent_internal_domain.LoginUserInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/LoginResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/InvalidRequestError'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/UnauthorizedError'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/SystemError'
+      summary: Logs in a user
+      tags:
+      - User
+schemes:
+- http
+securityDefinitions:
+  JWT:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
