@@ -29,8 +29,8 @@ func (r *pgxMenuCardRepository) Create(ctx context.Context, in *domain.MenuCard)
 		ctx = context.Background()
 	}
 	txVal := ctx.Value(TxKey)
-	q := `INSERT INTO menu_card (resturent_id, name, price, size, category, food_type, meal_type, image, is_available, description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id, created_at, updated_at`
-	args := []interface{}{in.ResturentID, in.Name, in.Price, in.Size, in.Category, in.FoodType, in.MealType, in.Image, in.IsAvailable, in.Description}
+	q := `INSERT INTO menu_card (resturent_id, name, price, size, category, food_type, meal_type, image, is_available, offer_price, description) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING id, created_at, updated_at`
+	args := []interface{}{in.ResturentID, in.Name, in.Price, in.Size, in.Category, in.FoodType, in.MealType, in.Image, in.IsAvailable, in.OfferPrice, in.Description}
 	if txVal != nil {
 		tx := txVal.(pgx.Tx)
 		err = tx.QueryRow(ctx, q, args...).Scan(&in.ID, &in.CreatedAt, &in.UpdatedAt)
@@ -154,8 +154,8 @@ func (r *pgxMenuCardRepository) Update(ctx context.Context, in *domain.MenuCard)
 		ctx = context.Background()
 	}
 	txVal := ctx.Value(TxKey)
-	q := `UPDATE menu_card SET resturent_id = $2, name = $3, price = $4, size = $5, category = $6, food_type = $7, meal_type = $8, image = $9, is_available = $10, description = $11 WHERE id = $1`
-	args := []interface{}{in.ID, in.ResturentID, in.Name, in.Price, in.Size, in.Category, in.FoodType, in.MealType, in.Image, in.IsAvailable, in.Description}
+	q := `UPDATE menu_card SET resturent_id = $2, name = $3, price = $4, size = $5, category = $6, food_type = $7, meal_type = $8, image = $9, is_available = $10, description = $11, offer_price = $12 WHERE id = $1`
+	args := []interface{}{in.ID, in.ResturentID, in.Name, in.Price, in.Size, in.Category, in.FoodType, in.MealType, in.Image, in.IsAvailable, in.Description, in.OfferPrice}
 	if txVal != nil {
 		tx := txVal.(pgx.Tx)
 		_, err = tx.Exec(ctx, q, args...)

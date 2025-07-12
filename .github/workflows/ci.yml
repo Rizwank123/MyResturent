@@ -15,6 +15,7 @@ jobs:
     services:
       postgres:
         image: postgres:15
+        
         env:
           # must specify password for PG Docker container image, see: https://registry.hub.docker.com/_/postgres?tab=description&page=1&name=10
           POSTGRES_USER: ${{ secrets.DB_USERNAME }}
@@ -63,4 +64,4 @@ jobs:
           DB_PORT: ${{secrets.DB_PORT}}
           DB_USERNAME: ${{secrets.DB_USERNAME}}
           DB_PASSWORD: ${{secrets.DB_PASSWORD}}
-          DB_DATABASE_NAME: ${{secrets.DB_DATABASE_NAME}}
+          DB_DATABASE_NAME: ${{ secrets.DB_DATABASE_NAME }}

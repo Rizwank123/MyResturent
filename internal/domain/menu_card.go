@@ -19,6 +19,7 @@ type (
 		ResturentID uuid.UUID `json:"resturent_id" db:"resturent_id" example:"c816d9e0-63e5-11ec-90d6-0242ac120003"`
 		Name        string    `json:"name,omitempty" db:"name"  example:"Alex t"`
 		Price       float64   `json:"price" db:"price" example:"5"`
+		OfferPrice  *float64  `json:"offer_price" db:"offer_price" example:"5"`
 		Category    Category  `json:"category,omitempty" db:"category" example:"Veg"`
 		Size        string    `json:"size,omitempty" db:"size" example:"half plate"`
 		Image       *string   `json:"image,omitempty" db:"image" example:"image"`
@@ -34,6 +35,7 @@ type (
 		ResturentID uuid.UUID `json:"resturent_id" db:"resturent_id" example:"c816d9e0-63e5-11ec-90d6-0242ac120003"`
 		Name        string    `json:"name,omitempty" db:"name"  example:"Butter Chicken"`
 		Price       float64   `json:"price" db:"price" example:"300"`
+		OfferPrice  float64   `json:"offer_price,omitempty" db:"offer_price" example:"300"`
 		Size        string    `json:"size,omitempty" db:"size"  example:"half plate"`
 		Category    Category  `json:"category,omitempty" db:"category" example:"veg"`
 		FoodType    FoodType  `json:"food_type,omitempty" db:"food_type" example:"Main Course"`
@@ -47,6 +49,7 @@ type (
 		ResturentID uuid.UUID `json:"resturent_id" db:"resturent_id" example:"c816d9e0-63e5-11ec-90d6-0242ac120003"`
 		Name        string    `json:"name,omitempty" db:"name"  example:"Butter Chicken"`
 		Price       float64   `json:"price" db:"price" example:"300"`
+		OfferPrice  float64   `json:"offer_price,omitempty" db:"offer_price" example:"300"`
 		Size        string    `json:"size,omitempty" db:"size"  example:"half plate"`
 		Category    Category  `json:"category,omitempty" db:"category" example:"veg"`
 		FoodType    FoodType  `json:"food_type,omitempty" db:"food_type" example:"Main Course"`
